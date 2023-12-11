@@ -1,6 +1,6 @@
 # app/crud/course.py
 from sqlalchemy.orm import Session
-from models.course import Course
+from models.model_course import Course
 from schemas.course import CourseCreate
 from crud.base import CRUDBase
 

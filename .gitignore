@@ -161,4 +161,3 @@ cython_debug/
 
 # Ignore Alembic-related files and directories
 alembic.ini
-alembic/versions/
