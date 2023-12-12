@@ -2,6 +2,8 @@ import json
 import fakeredis
 from unittest.mock import patch
 
+#Not fully functional
+
 @patch("redis.asyncio", return_value=fakeredis.FakeStrictRedis())
 def test_create_user(client):
     data = {"username":"testuser","email":"testuser@nofoobar.com","password":"testing"}

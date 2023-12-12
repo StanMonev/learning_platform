@@ -38,10 +38,9 @@ REDIS_URL=redis://localhost
 ```
 
 4. Create the initial database:
-`python create_database.py´
+```python create_database.py```
 
 5. Run database migrations:
-
 ```alembic upgrade head```
 
 ## Running the App Locally
@@ -56,3 +55,13 @@ Visit http://localhost:8000/docs in your browser to access the Swagger documenta
 Additional Notes
 Adjust the database URL, Redis URL, and other settings in the .env file as needed.
 Remember to update the database models and migration scripts as your application evolves.
+
+## Testing
+
+I couldn't get redis to be mocked in the tests and it gives a connection error to localhost:6379 when redis is not online.
+
+Adittionally you can create the initial test database:
+```python create_test_database.py```
+
+And then run:
+```python -m pytest```
