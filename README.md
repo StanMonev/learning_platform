@@ -13,7 +13,11 @@ A learning platform backend application that enables the exchange of teaching ma
 - python-dotenv (for managing environment variables)
 - Other dependencies (listed in `requirements.txt`)
 
-## Installation
+## Installation - With Docker
+
+``` docker compose up --build ```
+
+## Installation - Locally
 
 1. Clone the repository:
 
@@ -22,30 +26,32 @@ A learning platform backend application that enables the exchange of teaching ma
    cd learning-platform
 
 2. Install dependencies:
-`pip install -r requirements.txt´
+```pip install -r requirements.txt```
 
 3. Create a .env file in the project root and define the necessary environment variables, including DATABASE_URL for the database connection.
 
 Example .env file:
 
-`
+```
 DATABASE_URL=postgresql://username:password@localhost/learning_platform
 REDIS_URL=redis://localhost
-´
+```
 
 4. Create the initial database:
 `python create_database.py´
 
 5. Run database migrations:
 
-`alembic upgrade head´
+```alembic upgrade head```
 
 ## Running the App Locally
 Run the FastAPI application using Uvicorn:
 
-`uvicorn app:app --reload´
+```uvicorn app:app --reload```
 
-Visit http://127.0.0.1:8000/docs in your browser to access the Swagger documentation.
+## Access the docs
+
+Visit http://localhost:8000/docs in your browser to access the Swagger documentation.
 
 Additional Notes
 Adjust the database URL, Redis URL, and other settings in the .env file as needed.

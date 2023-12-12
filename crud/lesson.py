@@ -5,6 +5,6 @@ from schemas.lesson import LessonCreate
 from crud.base import CRUDBase
 
 class CRUDLesson(CRUDBase[Lesson, LessonCreate]):
-    pass
+    pass # All logic implemented in the base class
 
 crud_lesson = CRUDLesson(Lesson, LessonCreate)

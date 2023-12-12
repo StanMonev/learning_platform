@@ -1,34 +1,22 @@
-import os
+from pydantic_settings import BaseSettings
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from dotenv import load_dotenv
-from fastapi_limiter import FastAPILimiter
-from fastapi_cache import FastAPICache
+import redis.asyncio as redis
 
-# Load environment variables from .env
-load_dotenv()
+class Settings(BaseSettings):
+    database_url: str
+    redis_url: str
 
-# Database configuration
-DATABASE_URL = os.getenv('DATABASE_URL')
+    class Config:
+        env_file = ".env"    
+        
+    # Custom method to get Redis (override)
+    def get_redis(self):
+        # Implement your custom logic or return a mock
+        return redis.from_url(self.redis_url, encoding="utf-8", decode_responses=True)
 
-# Redis configuration for FastAPI Limiter
-REDIS_URL = os.getenv('REDIS_URL')
+settings = Settings()
 
-engine = create_engine(DATABASE_URL)
+# Engine and session intialization
+engine = create_engine(settings.database_url)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base = declarative_base()
-
-# FastAPI Limiter setup
-def get_limiter():
-    limiter = FastAPILimiter()
-    limiter.key_func = lambda: "global"
-    limiter.redis_url = REDIS_URL
-    return limiter
-
-# FastAPI Cache setup
-cache = FastAPICache()
-
-# FastAPI Cache dependencies
-def get_cache():
-    return cache

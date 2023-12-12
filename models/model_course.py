@@ -9,5 +9,3 @@ class Course(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
     description = Column(String)
-
-    lessons = relationship("Lesson", secondary="lessons")
