@@ -1,0 +1,12 @@
+fastapi==0.104.1
+uvicorn==0.24.0.post1
+sqlalchemy==1.4.50
+alembic==1.13.0
+psycopg2==2.9.9
+python-dotenv==1.0.0
+loguru==0.7.2
+sqlalchemy_utils==0.41.1
+redis==4.6.0
+fastapi_limiter==0.1.5
+fastapi_cache2==0.2.1
+pydantic_settings==2.1.0
