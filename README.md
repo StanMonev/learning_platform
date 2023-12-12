@@ -38,10 +38,9 @@ REDIS_URL=redis://localhost
 ```
 
 4. Create the initial database:
-`python create_database.py´
+```python create_database.py```
 
 5. Run database migrations:
-
 ```alembic upgrade head```
 
 ## Running the App Locally
@@ -53,6 +52,6 @@ Run the FastAPI application using Uvicorn:
 
 Visit http://localhost:8000/docs in your browser to access the Swagger documentation.
 
-Additional Notes
+## Additional Notes
 Adjust the database URL, Redis URL, and other settings in the .env file as needed.
 Remember to update the database models and migration scripts as your application evolves.
