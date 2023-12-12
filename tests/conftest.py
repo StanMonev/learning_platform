@@ -16,7 +16,6 @@ from models import model_user, model_course, model_lesson
 from test_settings import TestSettings
 from config.settings import SessionLocal
 from routes import router
-from pytest_redis.factories import redisdb
 
 # Load environment variables from .env.test
 from dotenv import load_dotenv
@@ -45,8 +44,8 @@ def app() -> Generator[FastAPI, Any, None]:
     _app = start_application()
     yield _app
     model_user.Base.metadata.drop_all(engine)
-    model_course.Base.metadata.drop_all(engine)
     model_lesson.Base.metadata.drop_all(engine)
+    model_course.Base.metadata.drop_all(engine)
 
 
 @pytest.fixture(scope="function")
@@ -62,7 +61,7 @@ def db_session(app: FastAPI) -> Generator[SessionTesting, Any, None]:
 
 @pytest.fixture(scope="function")
 def client(
-    app: FastAPI, db_session: SessionTesting, redisdb: Any
+    app: FastAPI, db_session: SessionTesting
 ) -> Generator[TestClient, Any, None]:
     """
     Create a new FastAPI TestClient that uses the `db_session` fixture to override
@@ -78,7 +77,3 @@ def client(
     app.dependency_overrides[SessionLocal] = _get_test_db
     with TestClient(app) as client:
         yield client
-
-@pytest.fixture
-def get_redis():
-    return lambda: REDIS_SERVER
