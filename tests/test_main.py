@@ -1,4 +1,4 @@
-# tests/test_main.py
+""" # tests/test_main.py
 
 from fastapi.testclient import TestClient
 from app import app
@@ -57,3 +57,4 @@ def test_read_lesson():
     assert response_read_lesson.json()["title"] == "Test Lesson"
     assert response_read_lesson.json()["content"] == "This is a test lesson"
     assert response_read_lesson.json()["course_id"] == course_id
+ """

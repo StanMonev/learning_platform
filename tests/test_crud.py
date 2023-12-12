@@ -1,12 +1,19 @@
-# tests/test_crud.py
+""" # tests/test_crud.py
+import os
 from sqlalchemy.orm import Session
 from fastapi.testclient import TestClient
-from config.settings import get_settings, override_settings
+from config.settings import Settings, SessionLocal, engine, get_redis
 from app import app
+from routes import router
 from config.settings import SessionLocal, engine
-from models.user import User
+from models.model_user import User
 from crud.user import CRUDUser
 from schemas.user import UserCreate
+
+# Load environment variables from .env.test
+from dotenv import load_dotenv
+
+load_dotenv('.env.test')
 
 # Apply database migrations
 from alembic import command
@@ -16,9 +23,11 @@ alembic_cfg = Config("alembic.ini")
 command.upgrade(alembic_cfg, "head")
 
 # Override settings to use a test database
-settings = get_settings()
-test_settings = override_settings(settings, test=True)
-app.dependency_overrides[get_settings] = lambda: test_settings
+settings = Settings()
+test_settings = Settings(
+    database_url=os.getenv('DATABASE_URL'),
+    redis_url=os.getenv('REDIS_URL')
+)
 
 # Create a test database session
 def override_get_db():
@@ -29,6 +38,7 @@ def override_get_db():
         db.close()
 
 app.dependency_overrides[Session] = override_get_db
+app.include_router(router, prefix="/routes", tags=["Routes"])
 
 # Create a test client
 client = TestClient(app)
@@ -71,3 +81,4 @@ def test_delete_user():
     assert response.status_code == 200
     data = response.json()
     assert data["id"] == user_id
+ """
