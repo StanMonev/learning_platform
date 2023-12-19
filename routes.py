@@ -128,7 +128,7 @@ async def delete_course_endpoint(course_id: int, db: Session = Depends(get_db)):
 
 #Get All Lessons with a default limit of 100
 @router.get("/lessons", dependencies=[Depends(RateLimiter(times=2, seconds=5))])
-async def get_all_users(db: Session = Depends(get_db)):
+async def get_all_lessons(db: Session = Depends(get_db)):
     logger.info(f"Fetching lessons...")
     lesson = crud_lesson.get_all(db)
     return lesson
