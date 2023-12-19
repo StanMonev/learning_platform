@@ -165,3 +165,5 @@ alembic.ini
 
 #Ignore Logs
 logs
+
+.vscode

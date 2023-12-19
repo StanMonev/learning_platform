@@ -58,7 +58,7 @@ Remember to update the database models and migration scripts as your application
 
 ## Testing
 
-I couldn't get redis to be mocked in the tests and it gives a connection error to localhost:6379 when redis is not online.
+Although the tests work, I couldn't get redis to be mocked and it gives a connection error to localhost:6379 when it's not online.
 
 Adittionally you can create the initial test database:
 ```python create_test_database.py```
